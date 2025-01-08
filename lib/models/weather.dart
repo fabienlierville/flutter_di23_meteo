@@ -40,6 +40,19 @@ class Weather {
     this.cod,
   });
 
+  String backgroundPicture(){
+    if(weather![0].icon!.contains("n")){
+      //Si il fait nuit (ex assets/images/02n.png) je retourne le fond "Nuit"
+      return "assets/img/n.jpg";
+    }else if(weather![0].icon!.contains("01") || weather![0].icon!.contains("02") || weather![0].icon!.contains("03")){
+      //Si il fait beau (ex assets/images/02.png) je retourne ce fond
+      return "assets/img/d1.jpg";
+    }else{
+      //Sinon c'est mauvais temps
+      return "assets/img/d2.jpg";
+    }
+  }
+
   factory Weather.fromJson(Map<String, dynamic> json) => Weather(
     coord: json["coord"] == null ? null : Coord.fromJson(json["coord"]),
     weather: json["weather"] == null ? [] : List<WeatherElement>.from(json["weather"]!.map((x) => WeatherElement.fromJson(x))),

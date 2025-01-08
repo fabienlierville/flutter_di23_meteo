@@ -37,6 +37,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    
     return Scaffold(
       appBar: AppBar(
         title: Text("Météo"),
@@ -98,18 +100,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-    body: Column(
-        children: [
-          FilledButton(
-              onPressed: () async{
-                print(villes);
-                //await addVille("Rouen", -100, 100);
-                await deleteVille("Rouen");
-                print(villes);
-              },
-              child: Text("Ajouter une ville")
-          )
-        ],
+    body: (weather == null)
+      ? Center(
+      child: Text('Pas de météo dispo'),
+    )
+      
+      :Container(
+      width: size.width ,
+      height: size.height,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage(weather!.backgroundPicture()),
+          fit: BoxFit.cover
+            )
+        ),
       ),
     );
   }
@@ -234,6 +238,8 @@ class _HomePageState extends State<HomePage> {
       });
     }
   }
+
+
 
 
 }
