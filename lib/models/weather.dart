@@ -52,6 +52,12 @@ class Weather {
       return "assets/img/d2.jpg";
     }
   }
+  String getIconeImage(){
+    String logo = weather![0].icon!.replaceAll("d", "").replaceAll("n", "");
+    return "assets/img/$logo.png";
+  }
+
+
 
   factory Weather.fromJson(Map<String, dynamic> json) => Weather(
     coord: json["coord"] == null ? null : Coord.fromJson(json["coord"]),

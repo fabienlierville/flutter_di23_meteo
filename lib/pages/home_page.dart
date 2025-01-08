@@ -5,6 +5,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:meteo_fabien/models/city.dart';
 import 'package:meteo_fabien/models/device_info.dart';
 import 'package:meteo_fabien/models/weather.dart';
+import 'package:meteo_fabien/my_flutter_app_icons.dart';
 import 'package:meteo_fabien/services/geocoder_service.dart';
 import 'package:meteo_fabien/services/weather_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -114,6 +115,51 @@ class _HomePageState extends State<HomePage> {
           fit: BoxFit.cover
             )
         ),
+      padding: EdgeInsets.all(20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(villeChoisie!.name, style: TextStyle(fontSize: 30, color: Colors.white),),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Text("${weather?.main?.temp?.toStringAsFixed(1)} °C",style: TextStyle(fontSize: 30, color: Colors.white),),
+              Image.asset(weather!.getIconeImage())
+            ],
+          ),
+          Text(weather?.weather?[0].main ?? "", style: TextStyle(fontSize: 30, color: Colors.white),),
+          Text(weather?.weather?[0].description ?? "", style: TextStyle(fontSize: 25, color: Colors.white),),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Column(
+                children: [
+                  Icon(MyFlutterApp.temperatire, color: Colors.white,),
+                  Text(weather!.main?.pressure?.toInt().toString() ?? "", style: TextStyle(fontSize: 20, color: Colors.white),),
+                ],
+              ),
+              Column(
+                children: [
+                  Icon(MyFlutterApp.droplet, color: Colors.white,),
+                  Text(weather!.main?.humidity?.toInt().toString() ?? "", style: TextStyle(fontSize: 20, color: Colors.white),),
+                ],
+              ),
+              Column(
+                children: [
+                  Icon(MyFlutterApp.arrow_upward, color: Colors.white,),
+                  Text(weather!.main?.tempMax?.toStringAsFixed(1) ?? "", style: TextStyle(fontSize: 20, color: Colors.white),),
+                ],
+              ),
+              Column(
+                children: [
+                  Icon(MyFlutterApp.arrow_downward, color: Colors.white,),
+                  Text(weather!.main?.tempMin?.toStringAsFixed(1) ?? "", style: TextStyle(fontSize: 20, color: Colors.white),),
+                ],
+              ),
+            ],
+          )
+        ],
+      ),
       ),
     );
   }
